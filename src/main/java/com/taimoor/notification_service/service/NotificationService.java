@@ -21,7 +21,7 @@ public class NotificationService {
         log.info("Got message from order-placed topic: {}", orderPlacedEvent);
         MimeMessagePreparator messagePreparator = mimeMessage -> {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
-            messageHelper.setFrom("springshop@email.com");
+            messageHelper.setFrom("mercato@email.com");
             messageHelper.setTo(orderPlacedEvent.getEmail().toString());
             messageHelper.setSubject(String.format("Your Order with OrderNumber %s is placed successfully", orderPlacedEvent.getOrderNumber()));
             messageHelper.setText(String.format("""
@@ -30,7 +30,7 @@ public class NotificationService {
                     Your order with order number %s is now placed successfully.
                     
                     Best Regards,
-                    Spring Shop
+                    Mercato
                     """,
                     orderPlacedEvent.getFirstName(),
                     orderPlacedEvent.getLastName(),
@@ -41,7 +41,7 @@ public class NotificationService {
             log.info("Order Notification email sent!");
         } catch (MailException e) {
             log.error("Error while sending order notification email", e);
-            throw new RuntimeException("Exception occured when sending mail to springshop@email.com", e);
+            throw new RuntimeException("Exception occured when sending mail to mercato@email.com", e);
         }
     }
 }
